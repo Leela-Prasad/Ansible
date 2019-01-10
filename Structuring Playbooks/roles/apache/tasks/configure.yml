@@ -1,0 +1,7 @@
+- name: Writing content into index.html
+  copy:
+    dest: /var/www/html/index.html
+    content: "Apache is Installed!!!"
+  notify:
+    - restart_apache
+

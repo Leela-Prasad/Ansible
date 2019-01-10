@@ -1,0 +1,7 @@
+- hosts: ec2-instances
+  become: true
+  tasks:
+    - name: Idempotent Example
+      copy:
+        dest: /home/ec2-user/Idempotent.txt
+        content: "Idempotent Example!!!"

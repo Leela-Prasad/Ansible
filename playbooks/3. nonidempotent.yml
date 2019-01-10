@@ -1,0 +1,5 @@
+- hosts: ec2-instances
+  become: true
+  tasks:
+    - name: Non Idempotent Example
+      shell: echo "Non Idempotent Example!!!" > /home/ec2-user/Nonidempotent.txt

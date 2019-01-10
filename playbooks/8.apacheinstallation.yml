@@ -1,0 +1,40 @@
+- hosts: ec2-instances
+  become: true
+  tasks:
+    - name: Install Latest Version of httpd
+      yum:
+        name: httpd
+        state: latest
+    - name: Start and enable httpd
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: Install firewalld
+      yum:
+        name: firewalld
+        state: latest
+    - name: Start and enable firewalld
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+    - name: permit http service
+      firewalld:
+        service: http
+        state: enabled
+        immediate: yes
+        permanent: true
+    - name: create a html web page
+      copy:
+        dest: /var/www/html/index.html
+        content: "Welcome!!!"
+    - name: Defining Web Server Name
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        line: ServerName www.managedhost.com:80
+        insertafter: "#ServerName"
+    - name: Update server name in /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        line: 13.233.250.248 www.managedhost.com

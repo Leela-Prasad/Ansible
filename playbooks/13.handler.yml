@@ -1,0 +1,17 @@
+- hosts: ec2-instances
+  become: true
+  tasks:
+    - name: Restart Httpd service
+      debug:
+        msg: Invoking handler
+      notify:
+        - restart_httpd
+    - name: Display some message
+      debug:
+        msg: Hello!!!!
+
+  handlers:
+    - name: restart_httpd
+      service:
+        name: httpd
+        state: restarted

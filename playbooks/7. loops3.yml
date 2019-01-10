@@ -1,0 +1,10 @@
+- hosts: ec2-instances
+  become: true
+  tasks:
+    - name: Create a User
+      user:
+        name: "{{item.name}}"
+        state: present
+        groups: "{{item.group}}"
+      with_items:
+        - {name: 'test', group: 'root' }

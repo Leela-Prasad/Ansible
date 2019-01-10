@@ -1,0 +1,11 @@
+- hosts: ec2-instances
+  become: true
+  tasks:
+    - name: Copy file conditionally
+      copy:
+        src: /Users/Leela/Desktop/AWS/test.yml
+        dest: /home/ec2-user/test.yml
+        owner: unixadm
+        group: root
+        mode: 0777
+      when: ansible_distribution == "Amazon" and ansible_distribution_major_version == "2"

@@ -1,0 +1,11 @@
+- hosts: ec2-instances
+  become: true
+  tasks:
+    - name: Install Postfix and dovecot
+      yum:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - postfix
+        - dovecot
+

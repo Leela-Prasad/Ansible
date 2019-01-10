@@ -1,0 +1,4 @@
+- hosts: ec2-instances
+  become: true
+  roles:
+    - apache
